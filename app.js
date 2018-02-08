@@ -60,9 +60,9 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
-  db.collection('passwords').find().toArray(function(err, results) {
 
+  db.collection('passwords').find().toArray(function(err, results) {
+    res.render('dashboard');
   })
   // res.sendFile(__dirname + '/index.pug')
 })
