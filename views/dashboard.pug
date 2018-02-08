@@ -5,25 +5,6 @@ html(lang='en')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     //script(src='/js/generate.js')
-    //- script(type='text/javascript').
-    //-  $(document).ready(function(){
-    //-     function generate() {
-    //-             passgen.passwordsol.value = randomPassword(15);
-    //-         }
-
-    //-     function randomPassword(length) {
-    //-         var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    //-         var pass = "";
-    //-         for (var x = 0; x < length; x++) {
-    //-             var i = Math.floor(Math.random() * chars.length);
-    //-             pass += chars.charAt(i);
-    //-         }
-    //-         console.log (pass);
-    //-         document.getElementById("password").value = pass;
-    //-         return pass;
-    //-         }
-    //-             })
-
     title Dashboard
   body
     .container-fluid
@@ -34,13 +15,13 @@ html(lang='en')
       .row
         .col-md-6
           h2
-            | Heading
+            | Get Password
           p
-            | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          p
-            a.btn(href='#') View details »
+            | This program allows users to generate and store passwords for later use.
+
           form.form-horizontal(role='form',action='/add', method='post',name = 'passgen')
             .form-group
+            input(type='hidden', name='uname')
               label.col-sm-2.control-label(for='url')
                 | Website Name/URL
               .col-sm-10
@@ -90,21 +71,7 @@ html(lang='en')
                 td
                   button Delete
 
-        | Field1: 
-        input#field1(type='text', value='Hello World!')
-        br
-        | Field2: 
-        input#field2(type='text')
-        br
-        br
-        button(onclick='myFunction()') Copy Text
-        p
-        | A function is triggered when the button is clicked. The function copies the text from Field1 into Field2.
 script.
-    function myFunction() {
-    document.getElementById("field2").value = document.getElementById("field1").value;
-    }
-
     function genFunc() {
        var length = 10;
        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
@@ -115,8 +82,6 @@ script.
             }
             console.log (pass);
             document.getElementById("password").value = pass;
-            //return pass;
             }
-                //})
-        //document.getElementById("field2").value = document.getElementById("field1").value;
+
   
