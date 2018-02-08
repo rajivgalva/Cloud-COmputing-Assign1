@@ -1,0 +1,122 @@
+doctype html
+html(lang='en')
+  head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    //script(src='/js/generate.js')
+    //- script(type='text/javascript').
+    //-  $(document).ready(function(){
+    //-     function generate() {
+    //-             passgen.passwordsol.value = randomPassword(15);
+    //-         }
+
+    //-     function randomPassword(length) {
+    //-         var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    //-         var pass = "";
+    //-         for (var x = 0; x < length; x++) {
+    //-             var i = Math.floor(Math.random() * chars.length);
+    //-             pass += chars.charAt(i);
+    //-         }
+    //-         console.log (pass);
+    //-         document.getElementById("password").value = pass;
+    //-         return pass;
+    //-         }
+    //-             })
+
+    title Dashboard
+  body
+    .container-fluid
+      .row
+        .col-md-12
+          h3.text-center
+            | Simple Password Generator
+      .row
+        .col-md-6
+          h2
+            | Heading
+          p
+            | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          p
+            a.btn(href='#') View details »
+          form.form-horizontal(role='form',action='/add', method='post',name = 'passgen')
+            .form-group
+              label.col-sm-2.control-label(for='url')
+                | Website Name/URL
+              .col-sm-10
+                input#inputurl.form-control(type='text',name='url')
+            .form-group
+              label.col-sm-2.control-label(for='username')
+                | Username
+              .col-sm-10
+                input#inputname.form-control(type='text',name='username')
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type='button',class='button',onClick='genFunc()')
+                  | Generate
+            .form-group
+              .col-sm-12
+                input.form-control(type='text', placeholder='Your Password Here',name='password',id="password")
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type='submit')
+                  | Use This Password
+        .col-md-6
+          h3
+            | Stored Passwords
+          table.table
+            thead
+              tr
+                th
+                  | #
+                th
+                  | Website
+                th
+                  | Username
+                th
+                  | Password
+                th
+                  | Action
+            tbody
+              tr
+                td
+                  | 1
+                td
+                  | TB - Monthly
+                td
+                  | 01/04/2012
+                td
+                  | Default
+                td
+                  button Delete
+
+        | Field1: 
+        input#field1(type='text', value='Hello World!')
+        br
+        | Field2: 
+        input#field2(type='text')
+        br
+        br
+        button(onclick='myFunction()') Copy Text
+        p
+        | A function is triggered when the button is clicked. The function copies the text from Field1 into Field2.
+script.
+    function myFunction() {
+    document.getElementById("field2").value = document.getElementById("field1").value;
+    }
+
+    function genFunc() {
+       var length = 10;
+       var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+            var pass = "";
+            for (var x = 0; x < length; x++) {
+                var i = Math.floor(Math.random() * chars.length);
+                pass += chars.charAt(i);
+            }
+            console.log (pass);
+            document.getElementById("password").value = pass;
+            //return pass;
+            }
+                //})
+        //document.getElementById("field2").value = document.getElementById("field1").value;
+  

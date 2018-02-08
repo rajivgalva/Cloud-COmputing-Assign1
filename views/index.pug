@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    title Test
+    title Password Generator
     link(rel='stylesheet', type='text/css', href='/css/style.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
@@ -10,7 +10,6 @@ html
     script(type='text/javascript').
      $(document).ready(function(){
         $('.message a').click(function(){
-          console.log("test");
         $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
         })
          })
@@ -27,18 +26,18 @@ html
       //-     p= error
       .login-page
       .form
-        form.register-form
-          input(type='text', placeholder='name')
-          input(type='password', placeholder='password')
-          input(type='text', placeholder='email address')
-          button create
+        form.register-form(action='/register', method='POST', enctype='application/x-www-form-urlencoded')
+          input(type='text', placeholder='name',name = 'username',id='uname')
+          input(type='password', placeholder='password',name = 'password',id='pswd')
+          input(type='text', placeholder='email address',name = 'email',id='email')
+          button(type='submit') create
           p.message
             | Already registered? 
             a(href='#') Sign In
-        form.login-form
-          input(type='text', placeholder='username')
-          input(type='password', placeholder='password')
-          button login
+        form.login-form(action='/login', method='POST', enctype='application/x-www-form-urlencoded')
+          input(type='text', placeholder='username',name = 'loginname')
+          input(type='password', placeholder='password',name = 'loginpass')
+          button(type='submit') login
           p.message
             | Not registered? 
             a(href='#') Create an account
