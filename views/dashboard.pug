@@ -18,10 +18,10 @@ html(lang='en')
             | Get Password
           p
             | This program allows users to generate and store passwords for later use.
-
+          - var userprofile = user
           form.form-horizontal(role='form',action='/add', method='post',name = 'passgen')
             .form-group
-              input(type='hidden', name='uname')
+              input(type='hidden', name='uname',id='uname',value= userprofile)
               label.col-sm-2.control-label(for='url')
                 | Website Name/URL
               .col-sm-10
@@ -76,9 +76,11 @@ html(lang='en')
                         p  
                             = passwords[i].password
                     td
-                        button(onClick='/delete') Delete
+                        button.remove-pass(data-id=passwords[i].password) Delete
 
 script.
+    //document.getElementById("uname").value = user;
+    console.log(user);
     function genFunc() {
        var length = 10;
        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
@@ -90,5 +92,18 @@ script.
             console.log (pass);
             document.getElementById("password").value = pass;
             }
+     $('buttons.remove.doc').on('click', function() {
+      var userId = $(this).attr('data-id');
+      $.ajax({
+         method: "POST",
+         url: "/delete",
+         data: {"userId": userId},
+         success: function(result) {
+            if(/* check if it is ok */) {
+                location.reload();
+            }
+         }
+      })
+   });
 
   

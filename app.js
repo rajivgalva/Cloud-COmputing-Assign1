@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
-const session = require('express-session');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 
 var db
@@ -23,7 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('view engine', 'pug');
 app.use(express.static('public'));
-app.use(session({secret: 'username'}));
+app.use(cookieParser());
+app.use(session({secret: 'passgen'}, {cookie: { secure: false }}));
 
 
 
@@ -41,17 +43,17 @@ app.post('/register', (req, res) => {
   })
 })
 
-app.post('/login', (req, res) => {
-  sess=req.session;
-  
+app.post('/login', (req, res) => {  
   console.log(req.body)
   db.collection('users').find().toArray(function(err, results) {
     var length = results.length;
     for(var i=0; i<length; i++){
      if ((req.body.loginname === results[i].username) && (req.body.loginpass === results[i].password))
      {
+      res.cookie('name',req.body.loginname);
       res.redirect('/dashboard')
-      sess.uname = req.body.loginname;
+      
+      //req.session.uname = req.body.loginname;
     }
     }
        
@@ -60,19 +62,12 @@ app.post('/login', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 
-  db.collection('passwords').find().toArray(function(err, results) {
-    res.render('dashboard',{passwords: results});
+  db.collection('passwords').find({uname:req.cookies.name}).toArray(function(err, results) {
+    res.render('dashboard',{passwords: results,user:req.cookies.name});
    // console.log(results);
-    for (var i = 0; i < results.length; i++) {
-      var object = results[i];
-      //console.log(object['url'])
-      // for (var property in object) {
-      //    // console.log('item ' + i + ': ' + property + '=' + object[property]);
-      //     console.log(object['url'])
-      // }
-  }
-  })
+    //console.log(req.cookies.name)
   // res.sendFile(__dirname + '/index.pug')
+})
 })
 
 app.get('/error', (req, res) => {
