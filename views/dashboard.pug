@@ -59,17 +59,24 @@ html(lang='en')
                 th
                   | Action
             tbody
-              tr
-                td
-                  | 1
-                td
-                  | TB - Monthly
-                td
-                  | 01/04/2012
-                td
-                  | Default
-                td
-                  button Delete
+              - for(var i=0; i<passwords.length; i++)
+                //- console.log("00000000003423sds")
+                - var pass = passwords[i].url
+                tr
+                    td
+                        p  
+                            = i+1
+                    td
+                        p  
+                            = passwords[i].url 
+                    td
+                        p  
+                            = passwords[i].username
+                    td
+                        p  
+                            = passwords[i].password
+                    td
+                        button(onClick='/delete') Delete
 
 script.
     function genFunc() {

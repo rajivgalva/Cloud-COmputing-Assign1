@@ -50,7 +50,6 @@ app.post('/login', (req, res) => {
     for(var i=0; i<length; i++){
      if ((req.body.loginname === results[i].username) && (req.body.loginpass === results[i].password))
      {
-      console.log("YAAAY")
       res.redirect('/dashboard')
       sess.uname = req.body.loginname;
     }
@@ -62,7 +61,16 @@ app.post('/login', (req, res) => {
 app.get('/dashboard', (req, res) => {
 
   db.collection('passwords').find().toArray(function(err, results) {
-    res.render('dashboard');
+    res.render('dashboard',{passwords: results});
+   // console.log(results);
+    for (var i = 0; i < results.length; i++) {
+      var object = results[i];
+      //console.log(object['url'])
+      // for (var property in object) {
+      //    // console.log('item ' + i + ': ' + property + '=' + object[property]);
+      //     console.log(object['url'])
+      // }
+  }
   })
   // res.sendFile(__dirname + '/index.pug')
 })
@@ -76,6 +84,6 @@ app.post('/add', (req, res) => {
   db.collection('passwords').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
-   // res.redirect('/dashboard')
+    res.redirect('/dashboard')
   })
 })
